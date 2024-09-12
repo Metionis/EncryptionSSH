@@ -6,11 +6,26 @@ from utils.checkKey import is_private_key, is_public_key
 from utils.keysInteract import *
 from utils.caesarCipher import caesar_encrypt, caesar_decrypt
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Define Caesar cipher shift amount
-SHIFT_AMOUNT = 3  # Example shift amount
+# SHIFT_AMOUNT = 3
+SHIFT_AMOUNT = os.getenv('KEY_SHIFT')
+if SHIFT_AMOUNT is None:
+    print("KEY_SHIFT not found in .env, using default value 3.")
+    # SHIFT_AMOUNT = 3
+else:
+    SHIFT_AMOUNT = int(SHIFT_AMOUNT) 
 
 def main():
-    ssh_dir = os.path.expanduser('C:/Users/Admin/.ssh')
+    # ssh_dir = os.path.expanduser('C:/Users/Admin/.ssh')
+    ssh_dir = os.getenv('SSH_KEY_DIR')
+    if ssh_dir is None:
+        print('Not found SSH_KEY_DIR')
+    else:
+        ssh_dir = str(ssh_dir)
     keys_found = False
 
     private_keys_content = {}
