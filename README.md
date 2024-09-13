@@ -10,8 +10,11 @@
 	```.\myenv\Scripts\activate```
 #### - For Linux use
 	```source myenv/bin/activate```
-### Download libraries in use
+### 5. Download libraries in use
 	```pip install python-dotenv```
  	```pip install pycryptodome```
 	```pip install cryptography```
  And others if needed
+### 6. To run a file
+	```python -m <file_name>```
+Remember before you run encryption.py, you must have SSH_keys inside your .ssh folder. In Windows it usually ../Users/Admin/.ssh and in Linux it often ~/.ssh. When you run encryption.py it will check if there exist SSH keys inside these folder, if yes begin encryption and delete original key inside .ssh folder, and store encrypted keys to this project. Then you can run decryption.py, It will return your key back to its orgiginal form, store them back to .ssh folder also delete encrypted keys inside this project.
