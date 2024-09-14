@@ -1,6 +1,9 @@
 import os
 from utils.caesarCipher import caesar_decrypt
 from utils.keysInteract import read_key, save_decrypted_key
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def decrypt_key(file_path, shift):
     """Decrypt the content of the file using Caesar cipher."""
@@ -47,9 +50,9 @@ def restore_keys(encrypted_key_dir, decrypted_key_dir, shift_amount):
         print(f"An error occurred: {e}")
 
 def main():
-    encrypted_key_dir = os.path.expanduser('D:/Github Projects/EncryptionSSH')  # Directory with encrypted .txt files
-    decrypted_key_dir = os.path.expanduser('C:/Users/Admin/.ssh/')  # Directory where decrypted files are stored
-    shift_amount = 3  # Example shift amount for Caesar cipher
+    encrypted_key_dir = os.getenv('ENCRYPTED_KEY_DIR')  # Directory with encrypted .txt files
+    decrypted_key_dir = os.getenv('DECRYPTED_KEY_DIR')  # Directory where decrypted files are stored
+    shift_amount = int(os.getenv('KEY_SHIFT'))  # Example shift amount for Caesar cipher
 
     try:
         restore_keys(encrypted_key_dir, decrypted_key_dir, shift_amount)
